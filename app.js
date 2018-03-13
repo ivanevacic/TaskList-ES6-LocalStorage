@@ -1,6 +1,6 @@
 //  Define UI variables
-const form = document.querySelector('#task-form');
-const taskList = document.querySelector('.collection');
+const form = document.querySelector('#task-form');  //  Target element with ID -> task-form
+const taskList = document.querySelector('.collection'); //  Target element with CLASS -> collection
 const clearBtn = document.querySelector('.clear-tasks');
 const filter = document.querySelector('#filter');
 const taskInput = document.querySelector('#task');
@@ -13,6 +13,8 @@ function loadEventListeners() {
     taskList.addEventListener('click', removeTask);
     //  Listen for click on element with .clear-tasks class and execute function clearTasks
     clearBtn.addEventListener('click', clearTasks);
+    //
+    filter.addEventListener('keyup', filterTasks);
 }
 
 //  Call function that loads all listeners
@@ -24,6 +26,9 @@ function addTask(e) {
     if(taskInput.value === ''){
         //  Alert user that input is empty
         alert('Can\'t add empty input!');
+        //  Stops function from executing further
+            //  Fixes bug when confirming alert would anyways create empty task
+                return;
     }
     //  Create li element
     const li = document.createElement('li');
@@ -73,8 +78,25 @@ function addTask(e) {
     }
 
 //  FilterTasks function
-function filterTasks(e) {
-    const text = e.target.value.toLowerCase();
-    document.querySelector
-}
+    //  Filters trough tasks based on current input
+        function filterTasks(e) {
+            //   Value of whatever is being currently typed in,to lower case(so it can be matched correctly)
+            const text = e.target.value.toLowerCase(); 
+            //  Select all elements that have a class of .collection item
+                //  Loop trough them(we can use forEach,since querySelectorAll returns nodeList)
+            document.querySelectorAll('.collection-item').forEach(
+                function(task){ //  task->iterator in forEach
+                    //  Get value of first child
+                    const item = task.firstChild.textContent;
+                    //  If value of item is equal to the currently typed input
+                        //  If there is match =>it is == -1,we check for opposite,so != -1
+                            if(item.toLowerCase().indexOf(text) != -1) {
+                                //  Show text if true
+                                task.style.display = 'block'
+                            }   else {
+                                //  Don't show anything
+                                task.style.display = 'none';
+                            }
+                });
+        }
 
