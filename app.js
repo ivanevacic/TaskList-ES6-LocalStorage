@@ -9,6 +9,8 @@ const taskInput = document.querySelector('#task');
 function loadEventListeners() {
     //  Listen for submit action on form variable and execute function addTask
     form.addEventListener('submit', addTask);
+    //  Listen for click on element with .collection class and execute function removeTask
+    taskList.addEventListener('click', removeTask);
 }
 
 //  Call function that loads all listeners
@@ -40,4 +42,16 @@ function addTask(e) {
     taskInput.value = '';
     //  Prevent default behaviour(form submit)
     e.preventDefault();
+}
+
+//  Remove Task function
+function removeTask(e) {
+    //  Target delete button(x)
+        //  We get 'i' element,but we need ti 'a' element -> the parent of 'i' element
+    if(e.target.parentElement.classList.contains('delete-item')) {
+        console.log(e.target);
+        //  Removes the whole 'li' element(task)
+            //  'a' is a parent of i,and li is a parent of 'a'-> we delete 'li' so that's why double parentElement
+        e.target.parentElement.parentElement.remove();
+    }    
 }
