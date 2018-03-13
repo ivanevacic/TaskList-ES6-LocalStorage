@@ -152,7 +152,13 @@ function storeTaskInLocalStorage(task) {
                     //  Remove 'li' from 'ul'
                     taskList.removeChild(taskList.firstChild);
                 } 
+        //  Clear tasks from Local Storage
+        clearTasksFromLocalStorage();
     }
+//  Clear tasks from Local Storage
+function clearTasksFromLocalStorage() {
+    localStorage.clear();
+}
 
 //  FilterTasks function
     //  Filters trough tasks based on current input
