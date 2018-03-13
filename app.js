@@ -11,6 +11,8 @@ function loadEventListeners() {
     form.addEventListener('submit', addTask);
     //  Listen for click on element with .collection class and execute function removeTask
     taskList.addEventListener('click', removeTask);
+    //  Listen for click on element with .clear-tasks class and execute function clearTasks
+    clearBtn.addEventListener('click', clearTasks);
 }
 
 //  Call function that loads all listeners
@@ -45,13 +47,34 @@ function addTask(e) {
 }
 
 //  Remove Task function
-function removeTask(e) {
-    //  Target delete button(x)
-        //  We get 'i' element,but we need ti 'a' element -> the parent of 'i' element
-    if(e.target.parentElement.classList.contains('delete-item')) {
-        console.log(e.target);
-        //  Removes the whole 'li' element(task)
-            //  'a' is a parent of i,and li is a parent of 'a'-> we delete 'li' so that's why double parentElement
-        e.target.parentElement.parentElement.remove();
-    }    
+    //  Remove specific task
+    function removeTask(e) {
+        //  Target delete button(x)
+            //  We get 'i' element,but we need ti 'a' element -> the parent of 'i' element
+        if(e.target.parentElement.classList.contains('delete-item')) {
+            console.log(e.target);
+            //  Removes the whole 'li' element(task)
+                //  'a' is a parent of i,and li is a parent of 'a'-> we delete 'li' so that's why double parentElement
+            e.target.parentElement.parentElement.remove();
+        }    
+    }
+
+//  ClearTasks  function
+    //  Deletes all tasks
+    function clearTasks() {
+        //  'Basic way'
+            //  taskList.innerHTML = '';
+        //  'Faster way'
+            //  While there is something in the list
+                while(taskList.firstChild) {
+                    //  Remove 'li' from 'ul'
+                    taskList.removeChild(taskList.firstChild);
+                } 
+    }
+
+//  FilterTasks function
+function filterTasks(e) {
+    const text = e.target.value.toLowerCase();
+    document.querySelector
 }
+
