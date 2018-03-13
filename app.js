@@ -104,7 +104,7 @@ function storeTaskInLocalStorage(task) {
     //  Push added task to the array
     tasks.push(task);
     //  Convert task to string and save into Local Storage
-    localStorage.setItem('tasks', JSON.stringify(task));
+    localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
 //  Remove Task function
